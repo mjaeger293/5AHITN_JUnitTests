@@ -19,7 +19,7 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceDirectory>src/main/test/java</project.build.sourceDirectory>
+        <project.build.testSourceDirectory>src/main/test/java</project.build.testSourceDirectory>
     </properties>
 
 </project>
