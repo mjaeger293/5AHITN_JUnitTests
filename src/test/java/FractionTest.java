@@ -6,13 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class FractionTest {
 
     @Test
-    public void getDividend() {
+    void getDividend() {
         Fraction f = new Fraction(1, 10);
         Assertions.assertEquals(1, f.getDividend());
     }
 
     @Test
-    public void setDividend() {
+    void setDividend() {
         Fraction f = new Fraction(1, 10);
         f.setDividend(2);
 
@@ -20,13 +20,13 @@ class FractionTest {
     }
 
     @Test
-    public void getDivisor() {
+    void getDivisor() {
         Fraction f = new Fraction(1, 10);
         Assertions.assertEquals(10, f.getDivisor());
     }
 
     @Test
-    public void setDivisor() {
+    void setDivisor() {
         Fraction f = new Fraction(1, 10);
         f.setDivisor(20);
 
@@ -34,7 +34,7 @@ class FractionTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         Fraction f = new Fraction(1, 10);
 
         Assertions.assertEquals("1 / 10", f.toString());
