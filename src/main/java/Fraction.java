@@ -1,5 +1,3 @@
-package htl.steyr;
-
 public class Fraction {
 
     private int dividend = 1;

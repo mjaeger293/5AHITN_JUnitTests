@@ -1,5 +1,3 @@
-package htl.steyr;
-
 public class Main {
     public static void main(String[] args) {
         int dividend = Integer.parseInt(args[0]);
