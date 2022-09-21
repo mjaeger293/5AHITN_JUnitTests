@@ -5,7 +5,7 @@ public class Main {
 
         Fraction f = new Fraction(dividend, divisor);
 
-        f.shorten();
+        f = f.shorten();
 
         System.out.println(f);
     }
