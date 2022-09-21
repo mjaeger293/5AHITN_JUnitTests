@@ -90,6 +90,23 @@ public class Fraction {
         return new Fraction(newDividend, newDivisor);
     }
 
+    public Fraction euclidShorten() {
+        int a = Math.max(this.dividend, this.divisor);
+        int b = Math.min(this.dividend, this.divisor);
+        int r = 0;
+
+        while (a % b != 0) {
+            r = a % b;
+            a = b;
+            b = r;
+        }
+
+        int newDividend = this.dividend / r;
+        int newDivisor = this.divisor / r;
+
+        return new Fraction(newDividend, newDivisor);
+    }
+
 
     @Override
     public String toString() {
