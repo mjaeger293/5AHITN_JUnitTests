@@ -6,7 +6,11 @@ public class Fraction {
     /**
      * Constructor for Fraction
      */
-    public Fraction(int dividend, int divisor) {
+    public Fraction(int dividend, int divisor) throws IllegalArgumentException {
+        if (divisor == 0) {
+            throw new IllegalArgumentException("Divisor ist gleich 0");
+        }
+
         this.dividend = dividend;
         this.divisor = divisor;
     }
@@ -23,7 +27,10 @@ public class Fraction {
         return divisor;
     }
 
-    public void setDivisor(int divisor) {
+    public void setDivisor(int divisor) throws IllegalArgumentException {
+        if (divisor == 0) {
+            throw new IllegalArgumentException("Divisor ist gleich 0");
+        }
         this.divisor = divisor;
     }
 
