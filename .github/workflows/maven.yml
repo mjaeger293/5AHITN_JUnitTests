@@ -38,3 +38,15 @@ jobs:
         with:
           name: Package
           path: staging
+      - name: Setup database
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 3306 # Optional, default value is 3306. The port of host
+          container port: 3306 # Optional, default value is 3306. The port of container
+          character set server: 'utf8mb4'
+          collation server: 'utf8mb4_general_ci'
+          mysql version: 'latest'
+          mysql database: 'junit-test' 
+          mysql root password: 'junit-test'
+          mysql user: 'junit-test'
+          mysql password: 'junit-test'
