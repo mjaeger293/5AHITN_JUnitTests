@@ -9,7 +9,8 @@ class DatabaseTest {
     @Test
     void createTable() throws SQLException {
         Connection connection = MySQLInstance.getInstance();
-        System.out.println(connection);
+
+        Assertions.assertNotEquals(null, connection);
 
         connection.prepareStatement("CREATE TABLE fraction (dividend INT, divisor INT)").execute();
     }
