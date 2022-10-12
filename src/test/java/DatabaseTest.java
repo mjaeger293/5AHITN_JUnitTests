@@ -27,16 +27,16 @@ class DatabaseTest {
         });
     }
 
-    @Order(2)
     @Test
+    @Order(2)
     void insert() throws SQLException {
         Assertions.assertDoesNotThrow(() -> {
             db.prepareStatement("INSERT INTO fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
         });
     }
 
-    @Order(3)
     @Test
+    @Order(3)
     void select() throws SQLException {
         Assertions.assertDoesNotThrow(() -> {
             ResultSet result = db.prepareStatement("SELECT * FROM fraction LIMIT 1").executeQuery();
