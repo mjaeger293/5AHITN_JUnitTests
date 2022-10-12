@@ -7,6 +7,19 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    services:
+      # Label used to access the service container
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: mysql
+          MYSQL_USER: junit-test
+          MYSQL_PASSWORD: junit-test
+          MYSQL_ROOT_PASSWORD: root
+
+        ports:
+          - 3306:3306
 
     steps:
       - name: Checkout
