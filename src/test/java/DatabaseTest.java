@@ -31,7 +31,7 @@ class DatabaseTest {
     @Order(2)
     void createTable() {
         Assertions.assertDoesNotThrow(() -> {
-            db.prepareStatement("CREATE TABLE fraction (dividend INT, divisor INT)").executeUpdate();
+            db.prepareStatement("CREATE TABLE `junit-test.fraction` (dividend INT, divisor INT)").executeUpdate();
         });
     }
 
@@ -39,7 +39,7 @@ class DatabaseTest {
     @Order(3)
     void insert() {
         Assertions.assertDoesNotThrow(() -> {
-            db.prepareStatement("INSERT INTO `junit-test`.fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
+            db.prepareStatement("INSERT INTO `junit-test.fraction` (dividend, divisor) VALUES (10, 5)").executeUpdate();
         });
     }
 
@@ -47,7 +47,7 @@ class DatabaseTest {
     @Order(4)
     void select() {
         Assertions.assertDoesNotThrow(() -> {
-            ResultSet result = db.prepareStatement("SELECT * FROM `junit-test`.fraction LIMIT 1").executeQuery();
+            ResultSet result = db.prepareStatement("SELECT * FROM `junit-test.fraction` LIMIT 1").executeQuery();
 
             if (result.next()) {
                 Assertions.assertEquals(10, result.getInt("dividend"));
