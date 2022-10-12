@@ -19,25 +19,33 @@ class DatabaseTest {
 
     @Test
     @Order(1)
-    void createTable() {
+    void createDatabase() {
         Assertions.assertDoesNotThrow(() -> {
-            db.prepareStatement("CREATE TABLE mysql.fraction (dividend INT, divisor INT)").executeUpdate();
+            db.prepareStatement("CREATE DATABASE junit-test").executeUpdate();
         });
     }
 
     @Test
     @Order(2)
-    void insert() {
+    void createTable() {
         Assertions.assertDoesNotThrow(() -> {
-            db.prepareStatement("INSERT INTO mysql.fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
+            db.prepareStatement("CREATE TABLE junit-test.fraction (dividend INT, divisor INT)").executeUpdate();
         });
     }
 
     @Test
     @Order(3)
+    void insert() {
+        Assertions.assertDoesNotThrow(() -> {
+            db.prepareStatement("INSERT INTO junit-test.fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
+        });
+    }
+
+    @Test
+    @Order(4)
     void select() {
         Assertions.assertDoesNotThrow(() -> {
-            ResultSet result = db.prepareStatement("SELECT * FROM mysql.fraction LIMIT 1").executeQuery();
+            ResultSet result = db.prepareStatement("SELECT * FROM junit-test.fraction LIMIT 1").executeQuery();
 
             if (result.next()) {
                 Assertions.assertEquals(10, result.getInt("dividend"));
