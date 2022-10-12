@@ -11,10 +11,11 @@ class DatabaseTest {
 
     @BeforeAll
     static void initDb() {
-        try {
-            db = MySQLInstance.getInstance();
-        } catch (Exception e) {
-        }
+        db = MySQLInstance.getInstance();
+    }
+
+    static void reconnect() {
+        db = MySQLInstance.getInstance();
     }
 
     @Test
@@ -22,6 +23,7 @@ class DatabaseTest {
     void createDatabase() {
         Assertions.assertDoesNotThrow(() -> {
             db.prepareStatement("CREATE DATABASE junit-test").executeUpdate();
+            reconnect();
         });
     }
 
