@@ -23,7 +23,7 @@ class DatabaseTest {
     @Order(1)
     void createTable() throws SQLException {
         Assertions.assertDoesNotThrow(() -> {
-            db.prepareStatement("CREATE TABLE mysql.fraction (dividend INT, divisor INT)").execute();
+            db.prepareStatement("CREATE TABLE mysql.fraction (dividend INT, divisor INT)").executeUpdate();
         });
     }
 
