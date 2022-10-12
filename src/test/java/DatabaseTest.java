@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
@@ -7,32 +9,44 @@ import java.sql.SQLException;
 
 class DatabaseTest {
 
-    @Test
-    void createTable() throws SQLException {
-        Connection connection = MySQLInstance.getInstance();
-        Assertions.assertNotEquals(null, connection);
+    static Connection db;
 
-        connection.prepareStatement("CREATE TABLE fraction (dividend INT, divisor INT)").execute();
+    @BeforeAll
+    static void initDb() {
+        try {
+            db = MySQLInstance.getInstance();
+        } catch (Exception e) {
+        }
     }
 
+    @Test
+    @Order(1)
+    void createTable() throws SQLException {
+        Assertions.assertDoesNotThrow(() -> {
+            db.prepareStatement("CREATE TABLE fraction (dividend INT, divisor INT)").execute();
+        });
+    }
+
+    @Order(2)
     @Test
     void insert() throws SQLException {
-        Connection connection = MySQLInstance.getInstance();
-        Assertions.assertNotEquals(null, connection);
-
-        connection.prepareStatement("INSERT INTO fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
+        Assertions.assertDoesNotThrow(() -> {
+            db.prepareStatement("INSERT INTO fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
+        });
     }
 
+    @Order(3)
     @Test
     void select() throws SQLException {
-        Connection connection = MySQLInstance.getInstance();
-        Assertions.assertNotEquals(null, connection);
+        Assertions.assertDoesNotThrow(() -> {
+            ResultSet result = db.prepareStatement("SELECT * FROM fraction LIMIT 1").executeQuery();
 
-        ResultSet result = connection.prepareStatement("SELECT * FROM fraction LIMIT 1").executeQuery();
-
-        if (result.next()) {
-            Assertions.assertEquals(10, result.getInt("dividend"));
-            Assertions.assertEquals(5, result.getInt("divisor"));
-        }
+            if (result.next()) {
+                Assertions.assertEquals(10, result.getInt("dividend"));
+                Assertions.assertEquals(5, result.getInt("divisor"));
+            } else {
+                Assertions.fail();
+            }
+        });
     }
 }

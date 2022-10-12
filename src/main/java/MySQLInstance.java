@@ -4,17 +4,6 @@ import java.sql.SQLException;
 
 public class MySQLInstance {
 
-    static {
-        try {
-            String driver = "com.mysql.jdbc.Driver";
-
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     private MySQLInstance() {
     }
 
