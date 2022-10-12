@@ -1,12 +1,10 @@
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DatabaseTest {
 
     static Connection db;
@@ -24,17 +22,6 @@ class DatabaseTest {
     void createTable() {
         Assertions.assertDoesNotThrow(() -> {
             db.prepareStatement("CREATE TABLE mysql.fraction (dividend INT, divisor INT)").executeUpdate();
-
-            db.prepareStatement("INSERT INTO mysql.fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
-
-            ResultSet result = db.prepareStatement("SELECT * FROM mysql.fraction LIMIT 1").executeQuery();
-
-            if (result.next()) {
-                Assertions.assertEquals(10, result.getInt("dividend"));
-                Assertions.assertEquals(5, result.getInt("divisor"));
-            } else {
-                Assertions.fail();
-            }
         });
     }
 
