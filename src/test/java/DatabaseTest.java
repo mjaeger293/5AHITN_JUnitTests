@@ -2,7 +2,6 @@ import org.junit.jupiter.api.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DatabaseTest {
@@ -24,6 +23,7 @@ class DatabaseTest {
         Assertions.assertDoesNotThrow(() -> {
             db.prepareStatement("CREATE DATABASE `junit-test`").executeUpdate();
             reconnect();
+            db.prepareStatement("USE `junit-test`").execute();
         });
     }
 
