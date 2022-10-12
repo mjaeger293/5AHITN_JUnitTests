@@ -31,7 +31,7 @@ class DatabaseTest {
     @Order(2)
     void createTable() {
         Assertions.assertDoesNotThrow(() -> {
-            db.prepareStatement("CREATE TABLE `junit-test`.fraction (dividend INT, divisor INT)").executeUpdate();
+            db.prepareStatement("CREATE TABLE fraction (dividend INT, divisor INT)").executeUpdate();
         });
     }
 
