@@ -24,7 +24,7 @@ public class MySQLInstance {
         if (connection == null) {
             try {
                 // erzeuge neue Verbinung zur Datenbank
-                connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/junit-test?useSSL=false", "root", "junit-test");
+                connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/junit-test", "root", "junit-test");
             } catch (SQLException throwables) {
             }
         }
