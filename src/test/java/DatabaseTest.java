@@ -23,7 +23,7 @@ class DatabaseTest {
     @Order(1)
     void createTable() throws SQLException {
         Assertions.assertDoesNotThrow(() -> {
-            db.prepareStatement("CREATE TABLE fraction (dividend INT, divisor INT)").execute();
+            db.prepareStatement("CREATE TABLE mysql.fraction (dividend INT, divisor INT)").execute();
         });
     }
 
@@ -31,7 +31,7 @@ class DatabaseTest {
     @Order(2)
     void insert() throws SQLException {
         Assertions.assertDoesNotThrow(() -> {
-            db.prepareStatement("INSERT INTO fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
+            db.prepareStatement("INSERT INTO mysql.fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
         });
     }
 
@@ -39,7 +39,7 @@ class DatabaseTest {
     @Order(3)
     void select() throws SQLException {
         Assertions.assertDoesNotThrow(() -> {
-            ResultSet result = db.prepareStatement("SELECT * FROM fraction LIMIT 1").executeQuery();
+            ResultSet result = db.prepareStatement("SELECT * FROM mysql.fraction LIMIT 1").executeQuery();
 
             if (result.next()) {
                 Assertions.assertEquals(10, result.getInt("dividend"));
