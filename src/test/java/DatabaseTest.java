@@ -70,26 +70,36 @@ class DatabaseTest {
 
     @Test
     @Order(3)
-    void createTable() {
+    void connectToSpecificDatabase() {
         Assertions.assertDoesNotThrow(() -> {
-            Connection c = connect("testdb");
-
-            c.prepareStatement("CREATE TABLE fraction (dividend INT, divisor INT)").executeUpdate();
+            connect("testdb");
         });
     }
 
     @Test
     @Order(4)
-    void insert() {
+    void createTable() {
         Assertions.assertDoesNotThrow(() -> {
             Connection c = connect("testdb");
 
-            c.prepareStatement("INSERT INTO fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
+            c.prepareStatement("CREATE TABLE fraction (dividend INT, divisor INT)").executeUpdate();
+            c.close();
         });
     }
 
     @Test
     @Order(5)
+    void insert() {
+        Assertions.assertDoesNotThrow(() -> {
+            Connection c = connect("testdb");
+
+            c.prepareStatement("INSERT INTO fraction (dividend, divisor) VALUES (10, 5)").executeUpdate();
+            c.close();
+        });
+    }
+
+    @Test
+    @Order(6)
     void select() {
         Assertions.assertDoesNotThrow(() -> {
             Connection c = connect("testdb");
@@ -102,6 +112,55 @@ class DatabaseTest {
             } else {
                 Assertions.fail();
             }
+
+            c.close();
         });
     }
+
+    @Test
+    @Order(7)
+    void deleteRow() {
+        Assertions.assertDoesNotThrow(() -> {
+            Connection c = connect("testdb");
+
+            Statement s = c.createStatement();
+
+            s.executeUpdate("DELETE TOP(1) FROM fraction");
+
+            s.close();
+            c.close();
+        });
+    }
+
+    @Test
+    @Order(8)
+    void dropTable() {
+        Assertions.assertDoesNotThrow(() -> {
+            Connection c = connect("testdb");
+
+            Statement s = c.createStatement();
+
+            s.executeUpdate("DROP TABLE fraction");
+
+            s.close();
+            c.close();
+        });
+    }
+
+    @Test
+    @Order(9)
+    void delete() {
+        Assertions.assertDoesNotThrow(() -> {
+            Connection c = connect("");
+
+            Statement s = c.createStatement();
+
+            s.executeUpdate("DROP DATABASE testdb");
+
+            s.close();
+            c.close();
+        });
+    }
+
+
 }
