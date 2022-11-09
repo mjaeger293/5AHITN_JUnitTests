@@ -125,7 +125,7 @@ class DatabaseTest {
 
             Statement s = c.createStatement();
 
-            s.executeUpdate("DELETE TOP(1) FROM fraction");
+            s.executeUpdate("DELETE FROM fraction WHERE dividend = 10");
 
             s.close();
             c.close();
