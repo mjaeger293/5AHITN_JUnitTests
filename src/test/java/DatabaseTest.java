@@ -61,9 +61,7 @@ class DatabaseTest {
 
             Statement s = c.createStatement();
 
-            s.executeUpdate("CREATE DATABASE testdb");
-
-            s.execute("USE `testdb`");
+            s.executeUpdate("CREATE DATABASE `testdb`");
 
             s.close();
             c.close();
@@ -96,7 +94,7 @@ class DatabaseTest {
         Assertions.assertDoesNotThrow(() -> {
             Connection c = connect("testdb");
 
-            ResultSet result = db.prepareStatement("SELECT * FROM fraction LIMIT 1").executeQuery();
+            ResultSet result = c.prepareStatement("SELECT * FROM fraction LIMIT 1").executeQuery();
 
             if (result.next()) {
                 Assertions.assertEquals(10, result.getInt("dividend"));
